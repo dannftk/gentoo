@@ -1,0 +1,53 @@
+diff --git a/src/libtracker-extract/tracker-module-manager.c b/src/libtracker-extract/tracker-module-manager.c
+index 1ab9b122b..3aeacb5c9 100644
+--- a/src/libtracker-extract/tracker-module-manager.c
++++ b/src/libtracker-extract/tracker-module-manager.c
+@@ -239,7 +239,7 @@ lookup_rules (const gchar *mimetype)
+ 	len = strlen (mimetype);
+ 
+ 	/* Apply the rules! */
+-	for (i = 0; i < rules->len; i++) {
++	for (i = 0; i < g_array_get_element_size(rules); i++) {
+ 		GList *l;
+ 
+ 		info = &g_array_index (rules, RuleInfo, i);
+@@ -328,7 +328,7 @@ tracker_extract_module_manager_get_rdf_types (void)
+ 
+ 	rdf_types = g_hash_table_new (g_str_hash, g_str_equal);
+ 
+-	for (i = 0; i < rules->len; i++) {
++	for (i = 0; i < g_array_get_element_size(rules); i++) {
+ 		info = &g_array_index (rules, RuleInfo, i);
+ 
+ 		if (!info->fallback_rdf_types)
+@@ -552,7 +552,7 @@ tracker_module_manager_load_modules (void)
+ 
+ 	g_return_if_fail (initialized == TRUE);
+ 
+-	for (i = 0; i < rules->len; i++) {
++	for (i = 0; i < g_array_get_element_size(rules); i++) {
+ 		rule_info = &g_array_index (rules, RuleInfo, i);
+ 		load_module (rule_info);
+ 	}
+diff --git a/src/miners/rss/tracker-miner-rss.c b/src/miners/rss/tracker-miner-rss.c
+index 0da57573c..0868de11c 100644
+--- a/src/miners/rss/tracker-miner-rss.c
++++ b/src/miners/rss/tracker-miner-rss.c
+@@ -391,7 +391,7 @@ handle_deletes (TrackerMinerRSS *miner,
+ 		}
+ 	}
+ 
+-	if (deleted->len > 0)
++	if (g_array_get_element_size(deleted) > 0)
+ 		delete_message_channels (miner, deleted);
+ 
+ 	g_array_free (deleted, TRUE);
+@@ -415,7 +415,7 @@ handle_updates (TrackerMinerRSS *miner,
+ 		}
+ 	}
+ 
+-	if (updated->len > 0)
++	if (g_array_get_element_size(updated) > 0)
+ 		retrieve_and_schedule_feeds (miner, updated);
+ 
+ 	g_array_free (updated, TRUE);

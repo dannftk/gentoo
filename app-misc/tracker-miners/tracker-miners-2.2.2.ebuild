@@ -73,6 +73,9 @@ pkg_setup() {
 }
 
 src_prepare() {
+
+	epatch "${FILESDIR}/${P}-segv.patch"
+
 	# Avoid gst-inspect calls that may trigger sandbox; instead assume the detection will succeed and add the needed test deps for that
 	if use gstreamer; then
 		sed -i -e 's:detect-h264-codec.sh:/bin/true:' tests/functional-tests/meson.build || die
