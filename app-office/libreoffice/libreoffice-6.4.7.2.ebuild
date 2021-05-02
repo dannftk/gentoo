@@ -276,6 +276,8 @@ PATCHES=(
 	"${FILESDIR}/${PN}-6.4.3.2-boost-1.73.patch" # bug 721806
 	"${FILESDIR}/${PN}-6.4.6.2-llvm-10.patch" # bug 713574
 	"${FILESDIR}"/${P}-icu-68-{1,2}.patch # bug 752021, +downstream backport
+
+	"${FILESDIR}/${P}-llvm-11.patch"
 )
 
 S="${WORKDIR}/${PN}-${MY_PV}"

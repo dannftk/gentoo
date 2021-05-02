@@ -39,6 +39,7 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-4.14-openssl-1.1.0-compatibility.patch #652428
 	"${FILESDIR}"/${PN}-ldflags.patch
 	"${FILESDIR}"/${PN}-4.14-do-not-compress-doc.patch
+	"${FILESDIR}"/${PN}-correct-deps.patch
 )
 
 src_prepare() {

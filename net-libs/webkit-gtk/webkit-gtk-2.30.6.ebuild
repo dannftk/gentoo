@@ -174,6 +174,7 @@ src_prepare() {
 	eapply "${FILESDIR}"/2.28.2-non-jumbo-fix.patch
 	eapply "${FILESDIR}"/2.28.4-non-jumbo-fix2.patch
 	eapply "${FILESDIR}"/2.30.3-fix-noGL-build.patch
+	eapply "${FILESDIR}"/${P}-locale.patch
 	cmake_src_prepare
 	gnome2_src_prepare
 }

@@ -1,0 +1,21 @@
+--- hardinfo-0.5.2_pre20130823.orig/includes/benchmark.h	2020-11-26 14:42:43.821261158 +0300
++++ hardinfo-0.5.2_pre20130823/includes/benchmark.h	2020-11-26 14:41:53.029256542 +0300
+@@ -5,7 +5,7 @@
+ 
+ extern ProgramParameters params;
+ 
+-enum {
++typedef enum {
+     BENCHMARK_BLOWFISH,
+     BENCHMARK_CRYPTOHASH,
+     BENCHMARK_FIB,
+--- hardinfo-0.5.2_pre20130823.orig/includes/ssh-conn.h	2020-11-26 14:43:42.464314297 +0300
++++ hardinfo-0.5.2_pre20130823/includes/ssh-conn.h	2020-11-26 14:41:39.768262189 +0300
+@@ -61,6 +61,6 @@
+ 	      gconstpointer buffer, gint num_bytes, gint * bytes_written);
+ int ssh_read(gint fd, gpointer buffer, gint num_bytes, gint * bytes_read);
+ 
+-const char *ssh_conn_errors[10];
++extern const char *ssh_conn_errors[10];
+ #endif				/* HAS_LIBSOUP */
+ #endif				/* __SSH_CONN_H__ */

@@ -1,0 +1,11 @@
+--- a/Source/JavaScriptCore/jsc.orig.cpp
++++ b/Source/JavaScriptCore/jsc.cpp
+@@ -20,6 +20,8 @@
+  *
+  */
+ 
++#include <locale>
++
+ #include "config.h"
+ 
+ #include "ArrayBuffer.h"
