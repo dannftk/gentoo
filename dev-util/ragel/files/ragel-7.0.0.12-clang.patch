@@ -1,0 +1,11 @@
+--- a/src/codegen.h
++++ b/src/codegen.h
+@@ -58,7 +58,7 @@
+ {
+ 	Variable( const char *name ) : name(name), isReferenced(false) {}
+ 
+-	operator const std::string() { isReferenced = true; return name; }
++	operator std::string() { isReferenced = true; return name; }
+ 	void reference() { isReferenced = true; }
+ 
+ 	const char *name;

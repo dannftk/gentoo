@@ -18,6 +18,7 @@ DEPEND="~dev-util/colm-0.13.0.7"
 RDEPEND="${DEPEND}"
 
 src_prepare() {
+	eapply "${FILESDIR}"/${P}-clang.patch
 	default
 	eautoreconf
 }
