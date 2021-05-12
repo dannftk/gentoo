@@ -1,0 +1,53 @@
+--- a/src/core/CLucene/queryParser/QueryParserTokenManager.cpp
++++ b/src/core/CLucene/queryParser/QueryParserTokenManager.cpp
+@@ -15,9 +15,9 @@
+ 
+ CL_NS_DEF(queryParser)
+ 
+-const int64_t QueryParserTokenManager::jjbitVec2[]={0x0L, 0x0L, _ILONGLONG(0xffffffffffffffff), _ILONGLONG(0xffffffffffffffff)};
++const int64_t QueryParserTokenManager::jjbitVec2[]={0x0L, 0x0L, _I64(-1), _I64(-1)};
+ const int64_t QueryParserTokenManager::jjbitVec0[] = {
+-	_ILONGLONG(0xfffffffffffffffe), _ILONGLONG(0xffffffffffffffff), _ILONGLONG(0xffffffffffffffff), _ILONGLONG(0xffffffffffffffff)
++	_I64(-2), _I64(-1), _I64(-1), _I64(-1)
+ };
+ const int32_t QueryParserTokenManager::jjnextStates[]={
+       15, 17, 18, 29, 32, 23, 33, 30, 20, 21, 32, 23, 33, 31, 34, 27,
+@@ -39,10 +39,10 @@
+       -1, 3, -1, -1, -1, 3, -1, -1
+ };
+ const int64_t QueryParserTokenManager::jjtoToken [] = {
+-		_ILONGLONG(0x1ffffff81)
++		_I64(0x1ffffff81)
+ };
+ const int64_t QueryParserTokenManager::jjtoSkip [] = {
+-		_ILONGLONG(0x40)
++		_I64(0x40)
+ };
+ 
+ QueryParserTokenManager::QueryParserTokenManager(CharStream* stream, const int32_t lexState) :
+--- a/src/shared/CLucene/_clucene-config.h.cmake
++++ b/src/shared/CLucene/_clucene-config.h.cmake
+@@ -56,6 +56,12 @@
+ #define _ILONG(x) x ## L
+ #define _ILONGLONG(x) ${_CL_ILONGLONG_VALUE}
+ 
++#if __SIZEOF_LONG__ == 8
++#define _I64(x) _ILONG(x)
++#else
++#define _I64(x) _ILONGLONG(x)
++#endif
++
+ ${FUNCTION_FILESTAT}
+ ${TYPE_CL_STAT_T}
+ ${FUNCTION_FILESIZE}
+--- a/src/core/CLucene/queryParser/QueryParser.cpp
++++ b/src/core/CLucene/queryParser/QueryParser.cpp
+@@ -79,7 +79,7 @@
+     _T("<RANGEEX_GOOP>")
+ };
+ 
+-const int32_t QueryParser::jj_la1_0[] = {0x180,0x180,0xe00,0xe00,0x1f69f80,0x48000,0x10000,0x1f69000,0x1348000,0x80000,0x80000,0x10000,0x18000000,0x2000000,0x18000000,0x10000,0x80000000,0x20000000,0x80000000,0x10000,0x80000,0x10000,0x1f68000};
++const int32_t QueryParser::jj_la1_0[] = {0x180,0x180,0xe00,0xe00,0x1f69f80,0x48000,0x10000,0x1f69000,0x1348000,0x80000,0x80000,0x10000,0x18000000,0x2000000,0x18000000,0x10000,static_cast<int32_t>(0x80000000),0x20000000,static_cast<int32_t>(0x80000000),0x10000,0x80000,0x10000,0x1f68000};
+ const int32_t QueryParser::jj_la1_1[] = {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x1,0x0,0x1,0x0,0x0,0x0,0x0};
+ 
+ struct QueryParser::JJCalls {
