@@ -292,6 +292,7 @@ PATCHES=(
 	"${FILESDIR}/${PN}-5.3.4.2-kioclient5.patch"
 	"${FILESDIR}/${PN}-6.1-nomancompress.patch"
 	"${FILESDIR}/${PN}-7.0.3.1-qt5detect.patch"
+	"${FILESDIR}/${PN}-7.1.3.2-clang.patch"
 )
 
 S="${WORKDIR}/${PN}-${MY_PV}"
