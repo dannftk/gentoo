@@ -34,7 +34,8 @@ S=${WORKDIR}/${MY_P}
 src_prepare() {
 	epatch \
 		"${FILESDIR}"/${PN}-1.5-gcc34.patch \
-		"${FILESDIR}"/${P}-fix-segfault.patch
+		"${FILESDIR}"/${P}-fix-segfault.patch \
+		"${FILESDIR}"/${P}-clang.patch
 }
 
 src_configure() {
