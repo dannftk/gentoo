@@ -34,6 +34,7 @@ amd64		default/linux/amd64/17.1/developer			stable
 amd64		default/linux/amd64/17.1/no-multilib			stable
 amd64		default/linux/amd64/17.1/no-multilib/hardened		stable
 amd64		default/linux/amd64/17.1/no-multilib/hardened/selinux	stable
+amd64		default/linux/amd64/17.1/no-multilib/systemd		dev
 amd64		default/linux/amd64/17.1/systemd			stable
 
 # AMD64 Profiles
@@ -181,6 +182,7 @@ ppc64		default/linux/powerpc/ppc64/17.0/64bit-userland/developer		stable
 ppc64		default/linux/ppc64/17.0				exp
 #ppc64		 default/linux/ppc64/17.0/desktop			exp
 #ppc64		 default/linux/ppc64/17.0/desktop/gnome			exp
+ppc64		default/linux/ppc64/17.0/systemd			exp
 #ppc64		 default/linux/ppc64/17.0/desktop/gnome/systemd		exp
 #ppc64		 default/linux/ppc64/17.0/developer			exp
 ppc64		default/linux/ppc64/17.0/musl				exp

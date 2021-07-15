@@ -3,8 +3,10 @@
 
 EAPI="7"
 
+LUA_COMPAT=( lua5-3 )
+
 [[ ${PV} == *9999 ]] && SCM="git-r3"
-inherit toolchain-funcs flag-o-matic systemd linux-info ${SCM}
+inherit toolchain-funcs flag-o-matic lua-single systemd linux-info ${SCM}
 
 MY_P="${PN}-${PV/_beta/-dev}"
 
@@ -12,7 +14,7 @@ DESCRIPTION="A TCP/HTTP reverse proxy for high availability environments"
 HOMEPAGE="http://www.haproxy.org"
 if [[ ${PV} != *9999 ]]; then
 	SRC_URI="http://haproxy.1wt.eu/download/$(ver_cut 1-2)/src/${MY_P}.tar.gz"
-	KEYWORDS="~amd64 ~arm ~ppc ~x86"
+	KEYWORDS="~amd64 ~arm ~arm64 ~ppc ~x86"
 else
 	EGIT_REPO_URI="http://git.haproxy.org/git/haproxy-$(ver_cut 1-2).git/"
 	EGIT_BRANCH=master
@@ -25,9 +27,11 @@ ssl systemd +threads tools vim-syntax +zlib lua device-atlas 51degrees wurfl"
 REQUIRED_USE="pcre-jit? ( pcre )
 	pcre2-jit? ( pcre2 )
 	pcre? ( !pcre2 )
+	lua? ( ${LUA_REQUIRED_USE} )
 	device-atlas? ( pcre )
 	?? ( slz zlib )"
 
+BDEPEND="virtual/pkgconfig"
 DEPEND="
 	crypt? ( virtual/libcrypt:= )
 	pcre? (
@@ -44,7 +48,7 @@ DEPEND="
 	slz? ( dev-libs/libslz:= )
 	systemd? ( sys-apps/systemd )
 	zlib? ( sys-libs/zlib )
-	lua? ( dev-lang/lua:5.3 )
+	lua? ( ${LUA_DEPS} )
 	device-atlas? ( dev-libs/device-atlas-api-c )"
 RDEPEND="${DEPEND}
 	acct-group/haproxy
@@ -66,6 +70,7 @@ haproxy_use() {
 }
 
 pkg_setup() {
+	use lua && lua-single_pkg_setup
 	if use net_ns; then
 		CONFIG_CHECK="~NET_NS"
 		linux-info_pkg_setup
@@ -94,9 +99,6 @@ src_compile() {
 	args+=( $(haproxy_use device-atlas DEVICEATLAS) )
 	args+=( $(haproxy_use wurfl WURFL) )
 	args+=( $(haproxy_use systemd SYSTEMD) )
-
-	# For now, until the strict-aliasing breakage will be fixed
-	append-cflags -fno-strict-aliasing
 
 	# Bug #668002
 	if use ppc || use arm || use hppa; then
